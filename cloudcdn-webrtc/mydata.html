@@ -1,0 +1,82 @@
+<html>
+<head>
+  <title>Simple WebRTC Data Channel Test</title>
+</head>
+<body>
+
+<script>
+
+function trace(text) {
+  // This function is used for logging.
+  if (text[text.length - 1] == '\n') {
+    text = text.substring(0, text.length - 1);
+  }
+  console.log((performance.now() / 1000).toFixed(3) + ": " + text);
+}
+
+var servers = {iceServers:[{url:"stun:stun.l.google.com:19302"}]};
+var pc_constraints = { optional:[ { RtpDataChannels: true } ]};
+var pc1 = new webkitRTCPeerConnection(servers, pc_constraints);
+var pc2 = new webkitRTCPeerConnection(servers, pc_constraints);
+var events = [];
+var createEventHandler = function(name){
+	return function(evt){console.log(''+ name + ' Event '+events.length, evt); events.push(evt);}
+};
+
+[pc1, pc2].forEach(function(pc,i){
+	var name = "peerConnection"+(i+1);
+	pc.onconnecting = createEventHandler(name+" onconnecting");
+	pc.onopen = createEventHandler(name+" onopen");
+	pc.onaddstream = createEventHandler(name+" onaddstream");
+	pc.onremovestream = createEventHandler(name+" onremovestream");
+	//pc.onicecandidate = createEventHandler(name+" onicecandidate");
+	pc.ondatachannel = createEventHandler(name+" ondatachannel");
+})
+
+var label = "a-label";
+var dc1 = pc1.createDataChannel(label, { reliable : false });
+var dc2 = pc2.createDataChannel(label, { reliable : false });
+
+[dc1, dc2].forEach(function(dc, i){
+	var name = "dataChannel"+(i+1);
+	dc.onclose = createEventHandler(name+" onclose");
+	dc.onerror = createEventHandler(name+" onerror");
+	dc.onmessage = createEventHandler(name+" onmessage");
+	dc.onopen = createEventHandler(name+" onopen");
+});
+
+pc1.onicecandidate = iceCallback1;
+function iceCallback1(event) { 
+  trace('local ice callback');
+  if (event.candidate) {
+    pc2.addIceCandidate(event.candidate);
+    trace('Local ICE candidate: \n' + event.candidate.candidate);
+  }
+}
+
+pc2.onicecandidate = iceCallback2;
+function iceCallback2(event) {
+  trace('remote ice callback');
+  if (event.candidate) {
+    pc1.addIceCandidate(event.candidate);
+    trace('Remote ICE candidate: \n ' + event.candidate.candidate);
+  }
+}
+
+pc1.createOffer(gotDescription1, null, { optional:[ { RtpDataChannels: true } ]});
+function gotDescription1(desc){
+  pc1.setLocalDescription(desc);
+  console.log("Offer from pc1 \n" + desc.sdp);
+  pc2.setRemoteDescription(desc);
+  pc2.createAnswer(gotDescription2);
+}
+
+function gotDescription2(desc){
+  pc2.setLocalDescription(desc);
+  console.log("Offer from pc2 \n" + desc.sdp);
+  pc1.setRemoteDescription(desc);
+}
+
+</script>
+
+</body>

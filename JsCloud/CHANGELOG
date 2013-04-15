@@ -1,0 +1,14 @@
+2012-02-28 Version 0.1 Liang <liang@ccs.neu.edu>
+A totally new version of FlashPeer and FlashPeerManager.
+
+- FlashPeer uses inStream and outStream netStatus event to determine
+connection status. Both streams are created at once, which is opposite
+to the old version(the old uses a take turns).
+- FlashPeerManager now holds a pubStream to detect new incoming
+"outStream from another peer". It creates a new FlashPeer either by
+user's action or detected a incoming stream.
+- Now all events are dispatched via EventListenerMixin. It supports both
+"addEventListener" and "onevent" styles of listening events.
+- Debugging hints: There is a commented line in the Bridge and
+EventListenerMixin that can monitor all flash-js communication and all
+events.

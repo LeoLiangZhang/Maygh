@@ -1,0 +1,31 @@
+<html>
+<head>
+  <title>Simple WebRTC Data Channel Test</title>
+</head>
+<body>
+
+<table width=100% height=100%>
+<tr><td><h1>Simple WebRTC Data Channel Test</h1></td></tr>
+<tr><td>(Note: this JS code is REALLY UGLY)</td></tr>
+<tr><td><div><button id="thebutton" onClick="start();">Start!</button></div><br/></td></tr>
+<tr><td><form id="pc1_form" action="javascript:sendit(1)">
+<div>pc1 says: <input id="pc1_input" type="text" value="type here" onKeyPress="return submitenter(this,event)"/>
+<input type="submit"/></div></form></td>
+<td><form id="pc1_blob" action="javascript:sendblob(1)">
+<div>pc1 sends a blob: <input id="pc1_browse" type="file"/>
+<input type="submit"/></div></form></td></tr>
+<tr><td><form id="pc2_form" action="javascript:sendit(2)">
+<div>pc2 says: <input id="pc2_input" type="text" value="type here" onKeyPress="return submitenter(this,event)"/>
+<input type="submit"/></div></form></td>
+<td><form id="pc2_blob" action="javascript:sendblob(2)">
+<div>pc2 sends a blob: <input id="pc2_browse" type="file"/>
+<input type="submit"/></div></form></td></tr>
+<tr><td><div id="datawindow" style="
+  width: 100%;
+  height: 500px;
+  overflow: auto;
+  border: 1px solid red;"></div></td></tr>
+
+<script type="application/javascript;version=1.8" src="data_test.js"></script>
+
+</html>

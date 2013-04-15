@@ -1,0 +1,8 @@
+.project
+.settings
+.actionScriptProperties
+bin-debug
+html-template
+*.swf
+*.html
+

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>CloudCDN micro-benchmark Page</title>
+<script type="text/javascript" src="lib/swfobject.js"></script>
+<script type="text/javascript" src="lib/shautils.js"></script>
+<script type="text/javascript" src="lib/md5.js"></script>
+<!-- <script type="text/javascript" src="lib/jquery-1.7.2.min.js"></script> -->
+<script type="text/javascript" src="js/micro_benchmark.js"></script>
+</head>
+<body>
+
+<div style="width:100%;">
+<p>
+<button onclick='serverInit()'>I'm a server.</button>
+<button onclick='clientInit()'>I'm a client.</button>
+<button onclick='serverInit2()'>I'm a server2(parallel).</button>
+<button onclick='clientInit2()'>I'm a client2(parallel).</button>
+</p>
+<p>
+<textarea id='output' rows="40" cols="120"></textarea>
+</p>
+</div>
+
+<div style='visibility:hidden;width:0px;height:0px;'>
+<div id='flCloud'>This is a place holder for swf object.</div>
+</div>
+</body>
+</html>
