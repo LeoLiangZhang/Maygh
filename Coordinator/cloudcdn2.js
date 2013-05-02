@@ -301,8 +301,8 @@ function main(){
 			logLevel: 'info',
 			items_peer: 20,
 			port: 1935,
-			servers: '', //#of servers, if '', then read config
-			name: "", // Server name must set
+			servers: '1', //#of servers, if '', then read config
+			name: "s1", // Server name must set
 			host: "localhost",
 			config : [{name: 's1', host: 'localhost', port: 9901, path: "s1.sock"},
 		              {name: 's2', host: 'localhost', port: 9902, path: "s2.sock"},
