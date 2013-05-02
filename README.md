@@ -1,6 +1,6 @@
 # Maygh
 
-Maygh, a system that builds a content distribution network from client web browsers, without the need for additional plugins or client-side software. 
+Maygh is a system that builds a content distribution network from client web browsers, without the need for additional plugins or client-side software. 
 
 A techniqical paper ([*Maygh: Building a CDN from client web browsers*](http://www.ccs.neu.edu/home/liang/paper/Maygh-EuroSys-13/Maygh-EuroSys.pdf)) is presented in EuroSys'13, at Prague. 
 

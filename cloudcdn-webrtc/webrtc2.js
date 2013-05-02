@@ -261,7 +261,7 @@ var SlideWindow = function(){ // This is a class
 
 function createPeerConnection() {
 	var stun_url = "stun:stun.l.google.com:19302";
-	stun_url = "stun:achtung.ccs.neu.edu:3478";
+	//stun_url = "stun:achtung.ccs.neu.edu:3478";
 	var servers = {iceServers:[{url:stun_url}]};
 	var pc_constraints = { optional:[ { RtpDataChannels: true } ]};
 	var pc = new webkitRTCPeerConnection(servers, pc_constraints);
